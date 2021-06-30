@@ -2,12 +2,14 @@ package com.example.mathmanialite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 import java.util.Random;
@@ -85,6 +87,21 @@ public class Game extends AppCompatActivity {
                 answer.setText("");
                 gameContinue();
                 resetTimer();
+
+                if(userLife <= 0){
+
+                    Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Game.this, Result.class);
+                    intent.putExtra("score", userScore);
+                    startActivity(intent);
+                    finish();
+
+                }
+                else{
+
+                    gameContinue();
+
+                }
 
             }
         });
